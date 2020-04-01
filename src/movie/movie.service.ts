@@ -11,7 +11,7 @@ export class MovieService {
   ) {}
 
   findAll(): Promise<Movie[]> {
-    return this.movieRepository.find();
+    return this.movieRepository.find({ relations: ['director', 'actors'] });
   }
 
   create(movie: Movie) {
