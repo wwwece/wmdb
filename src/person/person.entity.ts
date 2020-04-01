@@ -1,21 +1,12 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToMany,
-  ManyToMany,
-} from 'typeorm';
+import { Entity, OneToMany, ManyToMany, PrimaryColumn } from 'typeorm';
 import { Movie } from 'src/movie/movie.entity';
 
 @Entity('persons')
 export class Person {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
+  @PrimaryColumn('varchar', { name: 'firstname' })
   firstname: string;
 
-  @Column()
+  @PrimaryColumn('varchar', { name: 'lastname' })
   lastname: string;
 
   @OneToMany(

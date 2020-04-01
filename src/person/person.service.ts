@@ -10,11 +10,26 @@ export class PersonService {
     private readonly personRepository: Repository<Person>,
   ) {}
 
-  findAll(): Promise<Person[]> {
-    return this.personRepository.find();
+  async findAll(): Promise<Person[]> {
+    return await this.personRepository.find();
   }
 
-  create(person: Person) {
-    this.personRepository.save(person);
+  async create(person: Person): Promise<Person> {
+    return await this.personRepository.save(person);
+  }
+
+  async update(person: Person) {
+    return await this.personRepository.update(
+      { firstname: person.firstname, lastname: person.lastname },
+      person,
+    );
+  }
+
+  async remove(person: Person) {
+    try {
+      return await this.personRepository.delete(person);
+    } catch (QueryFailedError) {
+      throw QueryFailedError;
+    }
   }
 }
