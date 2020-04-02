@@ -7,6 +7,7 @@ import {
   JoinTable,
 } from 'typeorm';
 import { Person } from 'src/person/person.entity';
+import { Genre } from 'src/genre/genre.entity';
 
 @Entity('movies')
 export class Movie {
@@ -45,4 +46,12 @@ export class Movie {
   )
   @JoinTable()
   actors: Person[];
+
+  @ManyToMany(
+    type => Genre,
+    genre => genre.movies,
+    { cascade: true },
+  )
+  @JoinTable()
+  genre: Genre[];
 }

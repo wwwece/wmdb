@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Movie } from './movie.entity';
 import { Repository, DeleteResult } from 'typeorm';
-import { Person } from 'src/person/person.entity';
 
 @Injectable()
 export class MovieService {
@@ -13,7 +12,7 @@ export class MovieService {
 
   async findAll(): Promise<Movie[]> {
     return await this.movieRepository.find({
-      relations: ['director', 'actors'],
+      relations: ['director', 'actors', 'genre'],
     });
   }
 
